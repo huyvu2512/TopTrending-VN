@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const convertUrlsToLinks = (text) => {
             if (!text) return "Không có mô tả.";
             const escaped = escapeHtml(text);
-            const urlRegex = /(https?:\/\/[^\s\)\],;\?\!'"”’&<>]+)/g;
+            const urlRegex = /(https?:\/\/[^\s\)\],;\!\'"”’<>]+)/g;
             return escaped.replace(urlRegex, (url) => {
                 const cleanClass = 'desc-link-' + url.replace(/[^a-zA-Z0-9]/g, '');
                 return `<a href="${url}" target="_blank" class="desc-link ${cleanClass}">${url}</a>`;
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const extractLinks = (text) => {
                 if (!text) return [];
-                const urlRegex = /(https?:\/\/[^\s\)\],;\?\!'"”’<>]+)/g;
+                const urlRegex = /(https?:\/\/[^\s\)\],;\!\'""'<>]+)/g;
                 const matches = text.match(urlRegex) || [];
                 
                 const seen = new Set();
