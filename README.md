@@ -1,37 +1,41 @@
 <div align="center">
-  <img src="public/assets/images/TopTredingVN.png" alt="TopTrending VN Logo" width="100" />
-  <h1>TopTrending VN</h1>
-  <p><strong>Theo dõi & phân tích video đang thịnh hành trên YouTube Việt Nam — cập nhật tự động mỗi 30 phút.</strong></p>
 
-  <a href="https://toptrendingvn.vercel.app/">
-    <img src="https://img.shields.io/badge/🌐%20Live%20Demo-toptrendingvn.vercel.app-6366f1?style=for-the-badge" alt="Live Demo" />
-  </a>
-  &nbsp;
-  <a href="https://github.com/huyvu2512/TopTrending-VN/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge" alt="MIT License" />
-  </a>
-  &nbsp;
-  <a href="https://github.com/huyvu2512/TopTrending-VN/actions/workflows/update_data.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/huyvu2512/TopTrending-VN/update_data.yml?style=for-the-badge&label=Auto%20Update&color=f59e0b" alt="Auto Update Status" />
-  </a>
+# 🔥 TopTrending VN
+
+**Theo dõi & phân tích video đang thịnh hành trên YouTube Việt Nam — cập nhật tự động mỗi 30 phút.**
+
+![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-4-000000?logo=express&logoColor=white)
+![JavaScript](https://img.shields.io/badge/Vanilla%20JS-ES2022-F7DF1E?logo=javascript&logoColor=black)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)
+
+🌐 **[toptrendingvn.vercel.app](https://toptrendingvn.vercel.app/)** · 📦 **[GitHub](https://github.com/huyvu2512/TopTrending-VN)** · 👤 **[Liên hệ](https://beacons.ai/huyvu2512)**
+
+---
+
+### 📊 Thống Kê Dự Án
+
+[![Stars](https://img.shields.io/github/stars/huyvu2512/TopTrending-VN?style=flat-square&label=⭐%20Stars&color=FFCC00)](https://github.com/huyvu2512/TopTrending-VN/stargazers)
+[![Forks](https://img.shields.io/github/forks/huyvu2512/TopTrending-VN?style=flat-square&label=🍴%20Forks&color=6e7681)](https://github.com/huyvu2512/TopTrending-VN/forks)
+[![Issues](https://img.shields.io/github/issues/huyvu2512/TopTrending-VN?style=flat-square&label=🐛%20Issues&color=f85149)](https://github.com/huyvu2512/TopTrending-VN/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/huyvu2512/TopTrending-VN?style=flat-square&label=🕐%20Cập%20nhật&color=3fb950)](https://github.com/huyvu2512/TopTrending-VN/commits/main)
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=huyvu2512.TopTrending-VN&left_text=👁%20Lượt%20xem&left_color=6e7681&right_color=FF0000)
+
+> ⚠️ Các badge Stars/Forks/Issues/Cập nhật chỉ hiện đúng khi repo được **set Public** trên GitHub.
+
 </div>
 
 ---
 
-## 📊 Thống kê dự án
+## ⚠️ Tuyên bố miễn trách nhiệm
 
-<div align="center">
-
-[![Stars](https://img.shields.io/github/stars/huyvu2512/TopTrending-VN?style=for-the-badge&logo=starship&logoColor=fff&label=⭐%20Stars&color=f59e0b)](https://github.com/huyvu2512/TopTrending-VN/stargazers)
-[![Forks](https://img.shields.io/github/forks/huyvu2512/TopTrending-VN?style=for-the-badge&logo=git-fork&logoColor=fff&label=🍴%20Forks&color=6366f1)](https://github.com/huyvu2512/TopTrending-VN/network/members)
-[![Issues](https://img.shields.io/github/issues/huyvu2512/TopTrending-VN?style=for-the-badge&logo=github&logoColor=fff&label=🐛%20Issues&color=ef4444)](https://github.com/huyvu2512/TopTrending-VN/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/huyvu2512/TopTrending-VN?style=for-the-badge&logo=github-actions&logoColor=fff&label=🔄%20Cập%20nhật&color=22c55e)](https://github.com/huyvu2512/TopTrending-VN/commits/main)
-
-[![Visitors](https://visitor-badge.laobi.icu/badge?page_id=huyvu2512.TopTrending-VN&left_color=1e1b4b&right_color=6366f1&left_text=👁️%20Lượt%20xem)](https://github.com/huyvu2512/TopTrending-VN)
-[![Repo Size](https://img.shields.io/github/repo-size/huyvu2512/TopTrending-VN?style=for-the-badge&logo=files&logoColor=fff&label=📦%20Dung%20lượng&color=0ea5e9)](https://github.com/huyvu2512/TopTrending-VN)
-[![Deploy](https://img.shields.io/github/deployments/huyvu2512/TopTrending-VN/production?style=for-the-badge&logo=vercel&logoColor=fff&label=🚀%20Deploy&color=000)](https://toptrendingvn.vercel.app/)
-
-</div>
+> **Dự án này được xây dựng hoàn toàn vì mục đích học tập và phi lợi nhuận.**
+>
+> - Toàn bộ dữ liệu (tên video, thumbnail, lượt xem...) được lấy từ **YouTube Data API v3** — API chính thức do Google cung cấp và công khai.
+> - Dự án **không** lưu trữ, phân phối lại hay tái bản bất kỳ nội dung video nào của YouTube.
+> - Dự án **không** có mục đích thương mại, không kinh doanh, không thu phí dưới bất kỳ hình thức nào.
+> - Mọi nhãn hiệu, thương hiệu, và nội dung liên quan đến YouTube / Google đều thuộc sở hữu của **Google LLC**.
+> - Nếu có bất kỳ lo ngại nào về quyền sở hữu trí tuệ, vui lòng liên hệ tác giả để xử lý.
 
 ---
 
