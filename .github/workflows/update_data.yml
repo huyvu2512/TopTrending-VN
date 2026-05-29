@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Sử dụng Node 20 để hỗ trợ fetch API native
+          node-version: '24' # Sử dụng Node 24 LTS
           cache: 'npm'
 
       - name: Install Dependencies
