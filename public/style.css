@@ -1255,6 +1255,7 @@ body.modal-open {
     text-decoration: none;
     transition: all 0.3s ease;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+    word-break: break-all;
 }
 .desc-link:hover, .desc-link.glow {
     color: var(--accent-primary);
