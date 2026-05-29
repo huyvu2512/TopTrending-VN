@@ -21,8 +21,6 @@
 [![Last Commit](https://img.shields.io/github/last-commit/huyvu2512/TopTrending-VN?style=flat-square&label=🕐%20Cập%20nhật&color=3fb950)](https://github.com/huyvu2512/TopTrending-VN/commits/main)
 ![Visitors](https://visitor-badge.laobi.icu/badge?page_id=huyvu2512.TopTrending-VN&left_text=👁%20Lượt%20xem&left_color=6e7681&right_color=FF0000)
 
-> ⚠️ Các badge Stars/Forks/Issues/Cập nhật chỉ hiện đúng khi repo được **set Public** trên GitHub.
-
 </div>
 
 ---
