@@ -1,10 +1,7 @@
 name: Cập nhật dữ liệu YouTube Trending VN
 
 on:
-  schedule:
-    # Chạy mỗi 30 phút (giờ chẵn và 30 phút)
-    - cron: '*/30 * * * *'
-  # Cho phép kích hoạt thủ công từ tab Actions
+  # Cho phép kích hoạt thủ công từ tab Actions hoặc GitHub API
   workflow_dispatch:
 
 permissions:
