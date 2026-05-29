@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/assets/(.*)", "destination": "/public/assets/$1" },
+    { "source": "/data.json", "destination": "/public/data.json" },
+    { "source": "/app.js", "destination": "/public/app.js" },
+    { "source": "/style.css", "destination": "/public/style.css" },
+    { "source": "/(.*)", "destination": "/public/index.html" }
+  ]
+}

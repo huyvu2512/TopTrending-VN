@@ -1,0 +1,16 @@
+# Biến môi trường local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Thư mục thư viện Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Các file hệ thống hoặc log khác
+.DS_Store
+Thumbs.db
