@@ -39,4 +39,5 @@ jobs:
           git add public/data.json
           # Chỉ commit nếu có sự thay đổi trong data.json
           git commit -m "Auto-update: YouTube Trending Data [skip ci]" || echo "No changes to commit"
+          git pull --rebase origin main
           git push
