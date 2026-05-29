@@ -3,8 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const topThreeContainer = document.getElementById('top-three-list');
     const videoListContainer = document.getElementById('video-list');
     const tabs = document.querySelectorAll('.tab');
-    const lastUpdatedEl = document.getElementById('last-updated');
-    const modalLastUpdatedEl = document.getElementById('modal-last-updated');
+    const lastUpdatedPcEl = document.getElementById('last-updated-pc');
+    const lastUpdatedMobileEl = document.getElementById('last-updated-mobile');
+    const modalLastUpdatedPcEl = document.getElementById('modal-last-updated-pc');
+    const modalLastUpdatedMobileEl = document.getElementById('modal-last-updated-mobile');
 
     const modal = document.getElementById('video-modal');
     const closeModalBtn = document.getElementById('close-modal');
@@ -44,14 +46,23 @@ document.addEventListener('DOMContentLoaded', () => {
             trendingData = json.categories;
             
             const date = new Date(json.last_updated);
+            
+            // PC format: Cập nhật mới nhất: 19:12:37 - 29/5/2026
+            const timeStringPc = `Cập nhật mới nhất: ${date.toLocaleTimeString('vi-VN')} - ${date.toLocaleDateString('vi-VN')}`;
+            
+            // Mobile format: Cập nhật: 19:00 29/05/26
             const hours = String(date.getHours()).padStart(2, '0');
             const minutes = String(date.getMinutes()).padStart(2, '0');
-            const dateStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-            const timeString = `Cập nhật mới nhất: ${hours}:${minutes} - ${dateStr}`;
-            lastUpdatedEl.textContent = timeString;
-            if (modalLastUpdatedEl) {
-                modalLastUpdatedEl.textContent = timeString;
-            }
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = String(date.getFullYear()).slice(-2);
+            const dateStr = `${day}/${month}/${year}`;
+            const timeStringMobile = `Cập nhật: ${hours}:${minutes} ${dateStr}`;
+            
+            if (lastUpdatedPcEl) lastUpdatedPcEl.textContent = timeStringPc;
+            if (lastUpdatedMobileEl) lastUpdatedMobileEl.textContent = timeStringMobile;
+            if (modalLastUpdatedPcEl) modalLastUpdatedPcEl.textContent = timeStringPc;
+            if (modalLastUpdatedMobileEl) modalLastUpdatedMobileEl.textContent = timeStringMobile;
             
             renderList('default');
 
@@ -197,7 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function openModal(video, shouldPushState = true) {
-        modalIframe.src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        modalIframe.src = `https://www.youtube.com/embed/${video.id}?autoplay=${isMobile ? 0 : 1}`;
         document.getElementById('modal-title').textContent = video.title;
         document.getElementById('modal-views').textContent = formatNumber(video.views);
         document.getElementById('modal-likes').textContent = formatNumber(video.likes);
@@ -339,6 +351,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     linkBox.href = link.url;
                     linkBox.target = '_blank';
                     linkBox.className = 'modal-link-box';
+                    
+                    // Deep linking handling on mobile
+                    linkBox.addEventListener('click', (e) => {
+                        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+                        if (!isMobile) return; // Allow normal link opening on PC
+                        
+                        e.preventDefault();
+                        let deepLink = link.url;
+                        const lower = link.url.toLowerCase();
+                        
+                        if (lower.includes('facebook.com') || lower.includes('fb.com')) {
+                            deepLink = `fb://facewebmodal/query?href=${encodeURIComponent(link.url)}`;
+                        } else if (lower.includes('instagram.com')) {
+                            const match = link.url.match(/instagram\.com\/([a-zA-Z0-9_\.]+)/);
+                            if (match) deepLink = `instagram://user?username=${match[1]}`;
+                        } else if (lower.includes('tiktok.com')) {
+                            const match = link.url.match(/tiktok\.com\/@([a-zA-Z0-9_\.]+)/);
+                            if (match) deepLink = `snssdk1128://user/profile/userId?username=${match[1]}`;
+                        } else if (lower.includes('youtube.com') || lower.includes('youtu.be')) {
+                            deepLink = link.url.replace(/^https?:\/\//, 'youtube://');
+                        } else if (lower.includes('spotify.com')) {
+                            deepLink = link.url.replace(/^https?:\/\/(open|play)\.spotify\.com\//, 'spotify://');
+                        }
+                        
+                        if (deepLink !== link.url) {
+                            window.location.href = deepLink;
+                            // Fallback to web browser if app is not installed
+                            setTimeout(() => {
+                                window.open(link.url, '_blank');
+                            }, 1000);
+                        } else {
+                            window.open(link.url, '_blank');
+                        }
+                    });
                     linkBox.innerHTML = `
                         <span class="label">
                             ${link.iconHtml}

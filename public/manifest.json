@@ -1,0 +1,16 @@
+{
+  "name": "TopTrending VN",
+  "short_name": "TopTrending VN",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020204",
+  "theme_color": "#020204",
+  "icons": [
+    {
+      "src": "assets/images/TopTredingVN.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

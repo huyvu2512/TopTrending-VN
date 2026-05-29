@@ -20,6 +20,13 @@
     <link rel="icon" type="image/png" href="assets/images/TopTredingVN.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <!-- PWA / Mobile Home Screen Installation -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TopTrending VN">
+    <link rel="apple-touch-icon" href="assets/images/TopTredingVN.png">
 </head>
 <body>
     <header class="header">
@@ -30,8 +37,9 @@
                 <p class="logo-tagline">YouTube Trending Việt Nam</p>
             </div>
         </a>
-        <div class="last-updated" id="last-updated">
-            Cập nhật mới nhất: Đang tải dữ liệu...
+        <div class="last-updated">
+            <span class="last-updated-pc" id="last-updated-pc">Cập nhật mới nhất: Đang tải dữ liệu...</span>
+            <span class="last-updated-mobile" id="last-updated-mobile">Cập nhật: Đang tải...</span>
         </div>
     </header>
 
@@ -70,8 +78,9 @@
                         <p class="logo-tagline">YouTube Trending Việt Nam</p>
                     </div>
                 </a>
-                <div class="last-updated" id="modal-last-updated">
-                    Cập nhật mới nhất: Đang tải...
+                <div class="last-updated">
+                    <span class="last-updated-pc" id="modal-last-updated-pc">Cập nhật mới nhất: Đang tải...</span>
+                    <span class="last-updated-mobile" id="modal-last-updated-mobile">Cập nhật: Đang tải...</span>
                 </div>
             </header>
             <div class="modal-inner">

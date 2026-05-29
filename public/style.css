@@ -219,6 +219,7 @@ body.modal-open {
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
 }
 
 .tab:hover {
@@ -405,6 +406,7 @@ body.modal-open {
     gap: 16px;
     font-family: 'Inter', sans-serif;
     margin-top: 4px;
+    flex-wrap: nowrap;
 }
 
 .stat-pill {
@@ -414,6 +416,7 @@ body.modal-open {
     font-size: 12.5px;
     font-weight: 600;
     color: #ffffff;
+    white-space: nowrap;
 }
 
 .stat-pill .stat-icon {
@@ -573,7 +576,9 @@ body.modal-open {
     max-width: none;
     border-radius: 0;
     position: relative;
-    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     box-shadow: none;
     animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -591,6 +596,8 @@ body.modal-open {
 
 .modal-inner {
     padding: 30px 10% 50px 10%;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
 @keyframes modalSlideUp {
@@ -776,39 +783,326 @@ body.modal-open {
     color: #ff7b00;
 }
 
+.last-updated-mobile {
+    display: none;
+}
+.last-updated-pc {
+    display: inline;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
-    .top-three-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .container {
+        padding: 12px;
     }
-    .video-card {
+    .header {
+        padding: 10px 15px;
+    }
+    .logo-img {
+        height: 36px;
+    }
+    .logo-text h1 {
+        font-size: 20px;
+    }
+    .logo-tagline {
+        display: none;
+    }
+    .last-updated-pc {
+        display: none;
+    }
+    .last-updated-mobile {
+        display: inline;
+    }
+    .last-updated {
+        font-size: 11px;
+        white-space: nowrap;
+    }
+    .category-tabs {
+        margin: 15px 0 15px 0;
+    }
+    .top-three-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    .top-card {
+        padding: 12px;
+        border-radius: 16px;
+    }
+    .top-trend-badge {
+        width: 45px;
+        height: 45px;
+    }
+    .top-trend-badge .trend-new {
+        top: 6px;
+        left: -18px;
+        width: 70px;
+        padding: 1.5px 0;
+        font-size: 7px;
+    }
+    .top-card-content {
         flex-direction: column;
         align-items: flex-start;
-        padding-left: 70px;
-        position: relative;
+        gap: 8px;
+        margin-top: 12px;
     }
-    .thumbnail-container { width: 100%; }
-    .rank-container {
-        position: absolute;
-        top: 16px;
-        left: 16px;
+    .top-card-rank-col {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
         min-width: auto;
     }
-    .header { padding: 15px 20px; }
-    .trending-banner {
-        padding: 24px 28px;
-        margin: 15px 0 20px 0;
+    .top-card-rank {
+        font-size: 42px;
+        min-width: auto;
     }
-    .banner-title {
-        font-size: 28px;
-        letter-spacing: -1px;
+    .top-card-title {
+        font-size: 13px;
+        line-height: 1.3;
+    }
+    .top-card-channel {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+    .top-card-stats-dock {
+        gap: 6px;
+        flex-wrap: nowrap;
+    }
+    .stat-pill {
+        font-size: 10px;
+    }
+
+    /* Video list responsive layout */
+    .video-card {
+        gap: 16px;
+        padding: 12px;
+    }
+    .thumbnail-container {
+        width: 180px;
+    }
+    .title {
+        font-size: 15px;
+    }
+    
+    /* Modal responsive */
+    .modal-inner {
+        padding: 20px 15px 40px 15px;
+    }
+    .modal-header-toolbar {
+        padding-right: 60px;
+    }
+    .close-button {
+        top: 13px;
+        right: 12px;
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+        background: rgba(239, 68, 68, 0.95);
+        color: #fff;
     }
     .modal-layout {
         flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+    .modal-left {
+        width: 100%;
     }
     .modal-right {
         width: 100%;
+    }
+    .modal-title {
+        font-size: 16px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        display: block !important;
+    }
+    .modal-hashtags, .modal-description-box, #read-more-btn {
+        display: none !important;
+    }
+    .analysis-title {
+        font-size: 16px;
+        margin-bottom: 8px;
+        margin-top: 15px !important;
+    }
+    .modal-stat-box, .modal-link-box {
+        padding: 8px 12px;
+        border-radius: 10px;
+    }
+    .modal-stat-box .label, .modal-link-box .label {
+        font-size: 12px;
+        gap: 6px;
+    }
+    .modal-stat-box .value {
+        font-size: 14px;
+    }
+    .modal-stat-box .label svg, .modal-link-box .label svg {
+        width: 14px;
+        height: 14px;
+    }
+    .action-btn {
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding: 8px 10px;
+    }
+    .logo {
+        gap: 6px;
+    }
+    .logo-img {
+        height: 28px;
+    }
+    .logo-text h1 {
+        font-size: 15px;
+    }
+    .last-updated {
+        font-size: 10px;
+    }
+    .modal-header-toolbar {
+        padding-right: 55px;
+    }
+    .close-button {
+        top: 9px;
+        right: 8px;
+        width: 26px;
+        height: 26px;
+        font-size: 16px;
+        background: rgba(239, 68, 68, 0.95);
+        color: #fff;
+    }
+    .trending-banner {
+        padding: 12px 16px;
+        margin: 10px 0 15px 0;
+        border-radius: 12px;
+    }
+    .banner-badge-container {
+        margin-bottom: 8px;
+        gap: 8px;
+    }
+    .banner-badge {
+        font-size: 9px;
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
+    .banner-country {
+        font-size: 9px;
+    }
+    .banner-title {
+        font-size: 18px;
+    }
+    .tab {
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+    
+    /* Top 3 mobile optimization */
+    .top-three-grid {
+        gap: 6px;
+    }
+    .top-card {
+        padding: 6px;
+        border-radius: 12px;
+    }
+    .top-trend-badge {
+        width: 32px;
+        height: 32px;
+    }
+    .top-trend-badge .trend-new {
+        top: 4px;
+        left: -12px;
+        width: 50px;
+        padding: 1px 0;
+        font-size: 6px;
+        letter-spacing: 0.2px;
+    }
+    .top-card-rank {
+        font-size: 28px;
+    }
+    .top-card-title {
+        font-size: 10px;
+        margin-bottom: 1px;
+    }
+    .top-card-channel {
+        font-size: 8px;
+        margin-bottom: 4px;
+    }
+    .top-card-stats-dock {
+        gap: 4px;
+        flex-wrap: nowrap;
+    }
+    .stat-pill {
+        font-size: 8px;
+        gap: 2px;
+    }
+    .stat-pill .stat-icon {
+        width: 8px;
+        height: 8px;
+    }
+    .trend {
+        font-size: 11px;
+        margin-top: 0;
+        gap: 2px;
+    }
+    .trend-icon {
+        font-size: 9px;
+    }
+    .trend-value {
+        font-size: 9px;
+    }
+    
+    /* Compact horizontal cards on small screens */
+    .video-card {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 8px;
+        position: relative;
+    }
+    .rank-container {
+        min-width: 32px;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        position: static;
+    }
+    .rank {
+        font-size: 22px;
+        line-height: 1;
+    }
+    .trend {
+        margin-top: 2px;
+        font-size: 10px;
+    }
+    .trend-new {
+        margin-top: 2px;
+    }
+    .thumbnail-container {
+        width: 100px;
+    }
+    .title {
+        font-size: 12px;
+        line-height: 1.3;
+        margin-bottom: 2px;
+    }
+    .channel-name {
+        font-size: 10px;
+        margin-bottom: 4px;
+    }
+    .video-card .top-card-stats-dock {
+        gap: 6px;
+    }
+    .video-card .stat-pill {
+        font-size: 9px;
+        gap: 2px;
+    }
+    .video-card .stat-pill .stat-icon {
+        width: 9px;
+        height: 9px;
     }
 }
 
