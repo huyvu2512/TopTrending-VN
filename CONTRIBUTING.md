@@ -155,7 +155,7 @@ Xem chi tiết tại [README.md](README.md#️-kiến-trúc-dự-án).
 | `public/index.html` | SPA entry point, PWA meta tags |
 | `scripts/fetch_data.js` | Cào dữ liệu từ YouTube API, tính toán thứ hạng & biến động |
 | `server.js` | Express server cho local dev |
-| `.github/workflows/update_data.yml` | GitHub Actions CI/CD |
+| `.github/workflows/update_data.yml` | GitHub Actions CI/CD (kích hoạt qua GitHub API bởi cron-job.org) |
 
 ---
 

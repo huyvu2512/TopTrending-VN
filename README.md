@@ -49,7 +49,7 @@
 | 🔗 **Clean URL** | Mỗi video có URL riêng dạng `/[videoId]`, có thể chia sẻ và bookmark |
 | 📱 **PWA** | Cài đặt lên màn hình chính iOS / Android với icon và tên **TopTrending VN** |
 | 🌙 **Dark mode** | Giao diện tối hoàn toàn, tối ưu cho mọi thiết bị |
-| ⚡ **Cập nhật tự động** | GitHub Actions chạy mỗi 30 phút, tự commit `data.json` lên repo |
+| ⚡ **Cập nhật tự động** | Tích hợp **cron-job.org** cùng **GitHub API** kích hoạt Actions chạy chuẩn xác 100% mỗi 30 phút |
 | 📤 **Chia sẻ nhanh** | Web Share API — chia sẻ link video trực tiếp lên mọi ứng dụng |
 
 ---
@@ -131,20 +131,21 @@ Mở trình duyệt tại: [http://localhost:3000](http://localhost:3000)
 
 ## ⚙️ Cập nhật dữ liệu
 
-### Tự động (GitHub Actions)
+### ⚡ Tự động (cron-job.org + GitHub API)
 
-File `.github/workflows/update_data.yml` chạy mỗi 30 phút:
+Dữ liệu được cập nhật tự động mỗi **30 phút** bằng sự kết hợp giữa **cron-job.org** và **GitHub Actions API** (giúp chạy chính xác 100% từng giây và tránh bị delay/quá tải hàng đợi của GitHub):
 
-1. Checkout code
-2. Cài dependencies
-3. Chạy `npm run fetch` (cần secret `YOUTUBE_API_KEY` trong repo Settings)
-4. Commit & push `public/data.json` nếu có thay đổi
+1. **cron-job.org** gửi một yêu cầu `POST` tới GitHub API mỗi 30 phút để kích hoạt sự kiện `workflow_dispatch`.
+2. Máy ảo **GitHub Actions** (`.github/workflows/update_data.yml`) nhận lệnh và tự động khởi chạy.
+3. Chạy lệnh `npm run fetch` để cào dữ liệu trending mới nhất (sử dụng secret `YOUTUBE_API_KEY` được cấu hình an toàn trong settings của repo).
+4. Tự động commit và push file `public/data.json` mới lên GitHub.
+5. **Vercel** tự động nhận thay đổi và cập nhật nội dung trực tuyến ngay lập tức.
 
-**Thiết lập secret:**  
-`Settings` → `Secrets and variables` → `Actions` → `New repository secret`  
-Tên: `YOUTUBE_API_KEY`, Giá trị: API Key của bạn.
+**Cách thiết lập tự động:**
+* **Secret key:** Vào `Settings` → `Secrets and variables` → `Actions` → `New repository secret` → Tạo key `YOUTUBE_API_KEY` với API Key của bạn.
+* **Kích hoạt ngoài:** Sử dụng mã **Personal Access Token (PAT)** có quyền `workflow` để cấu hình một cron-job gửi request `POST` đến API GitHub.
 
-### Thủ công (qua API)
+### 🛠️ Thủ công (Khi chạy local)
 
 Khi server đang chạy, gọi:
 
