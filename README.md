@@ -9,7 +9,7 @@
 ![JavaScript](https://img.shields.io/badge/Vanilla%20JS-ES2022-F7DF1E?logo=javascript&logoColor=black)
 ![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)
 
-🌐 **[toptrendingvn.vercel.app](https://toptrendingvn.vercel.app/)** · 📦 **[GitHub](https://github.com/huyvu2512/TopTrending-VN)** · 👤 **[Liên hệ](https://beacons.ai/huyvu2512)**
+🌐 **[toptrendingvn](https://toptrendingvn.vercel.app/)** · 📦 **[GitHub](https://github.com/huyvu2512/TopTrending-VN)** · 👤 **[Liên hệ](https://beacons.ai/huyvu2512)**
 
 ---
 
