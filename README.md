@@ -43,9 +43,10 @@
 |---|---|
 | 🔥 **Top 3 nổi bật** | 3 video trending hàng đầu được hiển thị nổi bật với card lớn và badge riêng |
 | 📊 **Phân tích dữ liệu** | Xem lượt xem, lượt thích, bình luận và tốc độ xem/giờ cho từng video |
-| 📈 **Thông số biến động** | Hiển thị mức tăng/giảm hạng (▲ / ▼) so với lần cập nhật trước |
+| 📈 **Thông số biến động** | Hệ thống theo dõi tích lũy hiển thị mức tăng/giảm hạng liên tục (▲ / ▼) so với những lần cập nhật trước |
+| 🔥 **BXH Xem/Giờ** | Tab bảng xếp hạng riêng biệt dành cho top 50 video có tốc độ tăng lượt xem nhanh nhất hiện tại |
 | 🆕 **Nhãn video mới** | Badge "NEW" nổi bật cho các video xuất hiện trong vòng 3 ngày |
-| 🗂️ **4 danh mục** | Tổng hợp · Âm nhạc · Shorts · Trò chơi |
+| 🗂️ **Danh mục đa dạng** | Tổng hợp · Xem/Giờ · Âm nhạc · Shorts · Trò chơi |
 | 🔗 **Clean URL** | Mỗi video có URL riêng dạng `/[videoId]`, có thể chia sẻ và bookmark |
 | 📱 **PWA** | Cài đặt lên màn hình chính iOS / Android với icon và tên **TopTrending VN** |
 | 🌙 **Dark mode** | Giao diện tối hoàn toàn, tối ưu cho mọi thiết bị |

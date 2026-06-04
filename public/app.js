@@ -101,8 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             allVideos.sort((a, b) => b.viewsPerHour - a.viewsPerHour);
-            // Gán rank VPH riêng
-            videos = allVideos.map((v, i) => ({ ...v, vphRank: i + 1 }));
+            // Lấy top 50 và gán rank VPH riêng
+            videos = allVideos.slice(0, 50).map((v, i) => ({ ...v, vphRank: i + 1 }));
         } else {
             videos = trendingData[categoryKey] || [];
         }
