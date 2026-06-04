@@ -85,7 +85,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderList(categoryKey) {
-        const videos = trendingData[categoryKey] || [];
+        let videos;
+        const isVphMode = categoryKey === 'vph';
+
+        if (isVphMode) {
+            // Gộp tất cả video từ mọi danh mục, loại trùng, sắp xếp theo Xem/Giờ
+            const allVideos = [];
+            const seenIds = new Set();
+            for (const cat in trendingData) {
+                for (const v of trendingData[cat]) {
+                    if (!seenIds.has(v.id)) {
+                        seenIds.add(v.id);
+                        allVideos.push(v);
+                    }
+                }
+            }
+            allVideos.sort((a, b) => b.viewsPerHour - a.viewsPerHour);
+            // Gán rank VPH riêng
+            videos = allVideos.map((v, i) => ({ ...v, vphRank: i + 1 }));
+        } else {
+            videos = trendingData[categoryKey] || [];
+        }
+
         topThreeContainer.innerHTML = '';
         videoListContainer.innerHTML = '';
 
@@ -124,18 +145,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Render Top 3
         topThree.forEach(video => {
-            const rankClass = `rank-${video.rank}`;
+            const displayRank = isVphMode ? video.vphRank : video.rank;
+            const rankClass = `rank-${displayRank}`;
             const article = document.createElement('article');
             article.className = 'top-card';
+
+            // Trong tab VPH, hiển thị giá trị Xem/Giờ thay cho trend
+            let trendOrVphHtml = '';
+            if (isVphMode) {
+                trendOrVphHtml = `
+                    <div class="trend vph-badge">
+                        <svg class="stat-icon fire" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                        </svg>
+                        <span class="trend-value">${formatVPH(video.viewsPerHour)}/h</span>
+                    </div>
+                `;
+            } else {
+                trendOrVphHtml = video.trend && video.trend !== 'NEW' ? getTrendHtml(video, false) : '';
+            }
+
             article.innerHTML = `
                 <div class="top-thumbnail-container">
                     <img src="${video.thumbnail}" alt="Thumbnail" class="top-thumbnail">
-                    ${video.trend === 'NEW' ? `<div class="top-trend-badge"><span class="trend-new">NEW</span></div>` : ''}
+                    ${!isVphMode && video.trend === 'NEW' ? `<div class="top-trend-badge"><span class="trend-new">NEW</span></div>` : ''}
                 </div>
                 <div class="top-card-content">
                     <div class="top-card-rank-col">
-                        <div class="top-card-rank ${rankClass}">${video.rank}</div>
-                        ${video.trend && video.trend !== 'NEW' ? getTrendHtml(video, false) : ''}
+                        <div class="top-card-rank ${rankClass}">${displayRank}</div>
+                        ${trendOrVphHtml}
                     </div>
                     <div class="top-card-info">
                         <h2 class="top-card-title" title="${video.title.replace(/"/g, '&quot;')}">${video.title}</h2>
@@ -165,17 +203,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Render remaining videos
         remaining.forEach(video => {
-            const rankClass = video.rank <= 3 ? `top-${video.rank}` : '';
+            const displayRank = isVphMode ? video.vphRank : video.rank;
+            const rankClass = displayRank <= 3 ? `top-${displayRank}` : '';
             const article = document.createElement('article');
             article.className = 'video-card';
+
+            let trendOrVphHtml = '';
+            if (isVphMode) {
+                trendOrVphHtml = `
+                    <div class="trend vph-badge">
+                        <svg class="stat-icon fire" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                        </svg>
+                        <span class="trend-value">${formatVPH(video.viewsPerHour)}/h</span>
+                    </div>
+                `;
+            } else {
+                trendOrVphHtml = video.trend && video.trend !== 'NEW' ? getTrendHtml(video) : '';
+            }
+
             article.innerHTML = `
                 <div class="rank-container">
-                    <span class="rank ${rankClass}">${video.rank}</span>
-                    ${video.trend && video.trend !== 'NEW' ? getTrendHtml(video) : ''}
+                    <span class="rank ${rankClass}">${displayRank}</span>
+                    ${trendOrVphHtml}
                 </div>
                 <div class="thumbnail-container">
                     <img src="${video.thumbnail}" alt="Thumbnail" class="thumbnail">
-                    ${video.trend === 'NEW' ? `<div class="top-trend-badge"><span class="trend-new">NEW</span></div>` : ''}
+                    ${!isVphMode && video.trend === 'NEW' ? `<div class="top-trend-badge"><span class="trend-new">NEW</span></div>` : ''}
                 </div>
                 <div class="video-info">
                     <h2 class="title" title="${video.title.replace(/"/g, '&quot;')}">${video.title}</h2>

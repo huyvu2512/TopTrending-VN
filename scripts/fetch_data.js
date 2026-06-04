@@ -81,33 +81,73 @@ async function updateData() {
 
             let viewsPerHour = 0;
             let trend = "—";
-            const NEW_VIDEO_THRESHOLD_DAYS = 3; // Cấu hình mốc xác định video mới (3 ngày)
+            let trendDirection = null;  // "up" | "down" | null
+            let trendCount = 0;
+            const NEW_VIDEO_THRESHOLD_DAYS = 3;
 
             if (daysSincePublish <= NEW_VIDEO_THRESHOLD_DAYS) {
                 trend = "NEW";
+                trendDirection = null;
+                trendCount = 0;
             } else if (oldVideo) {
                 const oldRank = oldVideo.rank;
-                const rankChange = oldRank - currentRank;
-                if (rankChange > 0) trend = `▲ ${rankChange}`;
-                else if (rankChange < 0) trend = `▼ ${Math.abs(rankChange)}`;
-                else trend = "—";
+                const change = oldRank - currentRank; // dương = tăng hạng, âm = giảm hạng
+
+                if (change > 0) {
+                    // Video đang TĂNG hạng
+                    if (oldVideo.trendDirection === 'up') {
+                        // Cùng hướng tăng -> cộng dồn
+                        trendDirection = 'up';
+                        trendCount = (oldVideo.trendCount || 0) + change;
+                    } else {
+                        // Đổi hướng (trước đó giảm hoặc mới) -> RESET
+                        trendDirection = 'up';
+                        trendCount = change;
+                    }
+                    trend = `▲ ${trendCount}`;
+                } else if (change < 0) {
+                    // Video đang GIẢM hạng
+                    if (oldVideo.trendDirection === 'down') {
+                        // Cùng hướng giảm -> cộng dồn
+                        trendDirection = 'down';
+                        trendCount = (oldVideo.trendCount || 0) + Math.abs(change);
+                    } else {
+                        // Đổi hướng (trước đó tăng hoặc mới) -> RESET
+                        trendDirection = 'down';
+                        trendCount = Math.abs(change);
+                    }
+                    trend = `▼ ${trendCount}`;
+                } else {
+                    // Giữ nguyên hạng -> giữ nguyên trend cũ
+                    trendDirection = oldVideo.trendDirection || null;
+                    trendCount = oldVideo.trendCount || 0;
+                    if (trendDirection === 'up' && trendCount > 0) {
+                        trend = `▲ ${trendCount}`;
+                    } else if (trendDirection === 'down' && trendCount > 0) {
+                        trend = `▼ ${trendCount}`;
+                    } else {
+                        trend = "—";
+                    }
+                }
             }
 
-            if (oldVideo) {
+            // Tính Xem/Giờ
+            if (oldVideo && hoursDiff > 0) {
                 const oldViews = oldVideo.views;
-                if (hoursDiff > 0 && views >= oldViews) {
+                if (views >= oldViews) {
                     viewsPerHour = Math.round((views - oldViews) / hoursDiff);
                 } else {
+                    // Lượt xem giảm (YouTube hiệu chỉnh) -> giữ nguyên giá trị cũ
                     viewsPerHour = oldVideo.viewsPerHour || 0;
                 }
-            } else {
-                viewsPerHour = 0;
             }
 
             return {
                 id: videoId,
                 rank: currentRank,
                 trend: trend,
+                trendDirection: trendDirection,
+                trendCount: trendCount,
                 publishedAt: publishedAt,
                 title: item.snippet.title,
                 channelTitle: item.snippet.channelTitle,

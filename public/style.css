@@ -548,6 +548,18 @@ body.modal-open {
     font-weight: 800;
     margin-top: 4px;
 }
+.vph-badge {
+    color: #ff8c00;
+    gap: 3px;
+}
+.vph-badge .stat-icon.fire {
+    stroke: #ff8c00;
+}
+.vph-badge .trend-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff8c00;
+}
 
 /* Modal */
 .modal {
